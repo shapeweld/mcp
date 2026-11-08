@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
   "name": "io.github.shapeweld/shapeweld",
-  "description": "Free 3D file conversion: FBX, GLB, OBJ, STL, PLY, DAE, USDZ, 3MF and mesh tools, as a remote MCP server. No account; files deleted after 3 days.",
+  "description": "Free 3D conversion (FBX, GLB, OBJ, STL, PLY, DAE, USDZ, 3MF) as a remote MCP server. No account.",
   "version": "1.0.0",
   "repository": {
     "url": "https://github.com/shapeweld/mcp",
