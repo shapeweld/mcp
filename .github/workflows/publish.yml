@@ -1,0 +1,28 @@
+# Publishes server.json to the official MCP registry under the organisation's
+# namespace. Runs on a version tag or by hand; authenticates with the job's
+# OIDC token, so no secret is stored (the registry checks the repository's
+# organisation role from the token).
+name: publish to the MCP registry
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mcp-publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/').tar.gz" | tar xz mcp-publisher
+          sudo mv mcp-publisher /usr/local/bin/
+      - name: Log in with the job's OIDC token
+        run: mcp-publisher login github-oidc
+      - name: Publish
+        run: mcp-publisher publish
